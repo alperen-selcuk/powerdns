@@ -9,7 +9,7 @@ docker run -d -e MYSQL_ROOT_PASSWORD=pdns-secret --name mysql mariadb
 ardından powerdns ayağa kaldıracağız.
 
 ````
-docker run -d -p 53:53 -p 53:53/udp --name pdns \
+docker run -d -p 53:53 -p 53:53/udp --name pdns-master \
   --hostname ns1.devopsdude.info --link mysql \
   -e PDNS_gmysql_password=pdns-secret \
   -e PDNS_master=yes \
