@@ -11,7 +11,7 @@ ardından powerdns ayağa kaldıracağız.
 ````
 docker run -d -p 53:53 -p 53:53/udp --name pdns \
   --hostname ns1.devopsdude.info --link mariadb \
-  -e PDNS_gmysql_password=pdns-secret
+  -e PDNS_gmysql_password=pdns-secret \
   -e PDNS_master=yes \
   -e PDNS_api=yes \
   -e PDNS_api_key=secret \
