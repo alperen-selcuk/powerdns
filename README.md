@@ -3,14 +3,14 @@
 öncelikle docker kurulu bir host üzerinde powerdns in kullanacağı bir db ayağa kaldıracağız.
 
 ```
-docker run -d -e MYSQL_ROOT_PASSWORD=pdns-secret --name mariadb mariadb
+docker run -d -e MYSQL_ROOT_PASSWORD=pdns-secret --name mysql mariadb
 ```
 
 ardından powerdns ayağa kaldıracağız.
 
 ````
 docker run -d -p 53:53 -p 53:53/udp --name pdns \
-  --hostname ns1.devopsdude.info --link mariadb \
+  --hostname ns1.devopsdude.info --link mysql \
   -e PDNS_gmysql_password=pdns-secret \
   -e PDNS_master=yes \
   -e PDNS_api=yes \
@@ -28,9 +28,8 @@ backend:
 
 ````
 docker run -d --name pdns-admin-uwsgi \
-  --link mariadb --link pdns \
+  --link mysql --link pdns \
   -v pdns-admin-upload:/opt/powerdns-admin/upload \
-  -e PDNS_ADMIN_SQLA_DB_HOST="mariadb" \
   -e PDNS_ADMIN_SQLA_DB_PASSWORD="pdns-secret" \
   -e PDNS_VERSION=4.5 \
   -e PDNS_API_KEY=secret \
