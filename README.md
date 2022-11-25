@@ -31,6 +31,9 @@ backend:
 docker run -d --name pdns-admin-uwsgi \
   --link mariadb --link pdns \
   -v pdns-admin-upload:/opt/powerdns-admin/upload \
+  -e PDNS_ADMIN_SQLA_DB_PASSWORD=pdns-secret \
+  -e PDNS_VERSION=4.5 \
+  -e PDNS_API_KEY=secret \
   pschiffe/pdns-admin-uwsgi
   ````
 
