@@ -28,7 +28,7 @@ backend:
 
 ````
 docker run -d --name pdns-admin-uwsgi \
-  --link mysql --link pdns \
+  --link mysql --link pdns-master \
   -v pdns-admin-upload:/opt/powerdns-admin/upload \
   -e PDNS_ADMIN_SQLA_DB_PASSWORD="pdns-secret" \
   -e PDNS_VERSION=4.5 \
